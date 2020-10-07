@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 
+const replySchema = new mongoose.Schema({
+  text: { type: String, required: true, minlength: 1, maxlength: 1000 },
+  dateInMS: { type: Date, default: Date.now }
+});
 
 const commentSchema = new mongoose.Schema({
-  text: { type: String, required: true },
-  replies: { type: [String] },
+  text: { type: String, required: true, minlength: 1, maxlength: 1000 },
+  replies: { type: [replySchema] },
+  dateInMS: { type: Date, default: Date.now }
 });
 
 const videoSchema = new mongoose.Schema({
@@ -13,6 +18,10 @@ const videoSchema = new mongoose.Schema({
   comments: { type: [commentSchema] },
 });
 
+const Reply = mongoose.model('Reply', replySchema);
+
 const Comment = mongoose.model('Comment', commentSchema);
 
 const Video = mongoose.model('Video', videoSchema);
+
+module.exports = Reply, Comment, Video;
