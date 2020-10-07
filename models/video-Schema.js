@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 
 const replySchema = new mongoose.Schema({
   text: { type: String, required: true, minlength: 1, maxlength: 1000 },
-  dateInMS: { type: Date, default: Date.now }
+  postTime: { type: Date, default: Date.now }
 });
 
 const commentSchema = new mongoose.Schema({
   text: { type: String, required: true, minlength: 1, maxlength: 1000 },
   replies: { type: [replySchema] },
-  dateInMS: { type: Date, default: Date.now }
+  postTime: { type: Date, default: Date.now }
 });
 
 const videoSchema = new mongoose.Schema({
@@ -16,6 +16,7 @@ const videoSchema = new mongoose.Schema({
   likes: { type: Number },
   dislikes: { type: Number },
   comments: { type: [commentSchema] },
+  postTime: { type: Date, default: Date.now }
 });
 
 const Reply = mongoose.model('Reply', replySchema);
