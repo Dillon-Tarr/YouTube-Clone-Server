@@ -24,4 +24,6 @@ const Comment = mongoose.model('Comment', commentSchema);
 
 const Video = mongoose.model('Video', videoSchema);
 
-module.exports = Reply, Comment, Video;
+module.exports.Reply = Reply;
+module.exports.Comment = Comment;
+module.exports.Video = Video;

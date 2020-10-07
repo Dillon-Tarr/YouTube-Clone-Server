@@ -1,6 +1,4 @@
-const Reply = require('../models/models');
-const Comment = require('../models/models');
-const Video = require('../models/models');
+const {Video, Comment, Reply} = require('../models/video-Schema');
 
 const express = require('express');
 const router = express.Router();
