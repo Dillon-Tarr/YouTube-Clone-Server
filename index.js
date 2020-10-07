@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./config/db');
+const connectDB = require('./startup/db');
 const app = express();
 const videos = require('./routes/videos');
 
