@@ -6,9 +6,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   try {
  
-  const video = new Video({
-  videoId: 'some video ID',
-  });
+  const video = new Video(req.body);
   await video.save();
   return res.send(video);
   } catch (ex) {
