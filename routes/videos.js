@@ -1,4 +1,4 @@
-const {Video, validateVideo, Comment, Reply} = require('../models/video-Schema');
+const {Video, validateVideo} = require('../models/video-Schema');
 
 const express = require('express');
 const router = express.Router();

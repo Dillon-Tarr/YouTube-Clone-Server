@@ -20,9 +20,6 @@ const videoSchema = new mongoose.Schema({
   postTime: { type: Date, default: Date.now }
 });
 
-
-const Reply = mongoose.model('Reply', replySchema);
-const Comment = mongoose.model('Comment', commentSchema);
 const Video = mongoose.model('Video', videoSchema);
 
 function validateVideo(video) {
@@ -35,7 +32,5 @@ function validateVideo(video) {
   return schema.validate(video);
 }
 
-module.exports.Reply = Reply;
-module.exports.Comment = Comment;
 module.exports.Video = Video;
 module.exports.validateVideo = validateVideo;
