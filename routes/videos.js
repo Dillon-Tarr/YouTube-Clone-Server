@@ -46,34 +46,31 @@ router.post('/', async (req, res) => {
 });
 
 // Update LIKES or DISLIKES
+// OR Add a comment to an existing video
 router.put('/:id', async (req, res) => {
   try {
-  const video = await Video.findByIdAndUpdate(
-    req.params.id,
-    {
-    likes: req.body.likes,
-    dislikes: req.body.dislikes,
-    },
-    { new: true }
-  );
-  if (!video)
-    return res.status(400).send(`The video with id "${req.params.id}" does not exist.`);
-  await video.save();
-  return res.send(video);
-  } catch (ex) {
-  return res.status(500).send(`Internal Server Error: ${ex}`);
-  }
-});
-
-//Add a comment to an existing video
-router.put('/add_comment/:id', async (req, res) => {
-  try {
-  const video = await Video.findById(req.params.id);
-  if (!video)
-    return res.status(400).send(`The video with id "${req.params.id}" does not exist.`);
-  video.comments.push(req.body);
-  await video.save();
-  return res.send(video);
+    if (req.body.text){
+      const video = await Video.findById(req.params.id);
+      if (!video)
+        return res.status(400).send(`The video with id "${req.params.id}" does not exist.`);
+      video.comments.push(req.body);
+      await video.save();
+      return res.send(video);
+    }
+    else{
+      const video = await Video.findByIdAndUpdate(
+        req.params.id,
+        {
+        likes: req.body.likes,
+        dislikes: req.body.dislikes,
+        },
+        { new: true }
+      );
+      if (!video)
+        return res.status(400).send(`The video with id "${req.params.id}" does not exist.`);
+      await video.save();
+      return res.send(video);
+    }
   } catch (ex) {
   return res.status(500).send(`Internal Server Error: ${ex}`);
   }
